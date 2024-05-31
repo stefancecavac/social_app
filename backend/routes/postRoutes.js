@@ -5,8 +5,9 @@ import {getAllPosts , createPost} from '../controllers/postController.js'
 import authenticate from '../middleware/authentication.js'
 
 
-router.use(authenticate)
 router.get('/' , getAllPosts)
+
+router.use(authenticate)
 router.post('/' , createPost)
 
 

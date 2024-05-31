@@ -43,10 +43,15 @@ const registerUser = async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure:true
+            secure: true
         })
 
-        res.status(200).json(user.rows[0])
+        res.status(200).json({
+            id: user.user_id,
+            email: user.email,
+            name: user.name,
+            last_name: user.last_name
+        })
 
     } catch (error) {
         console.log(`error registering user`, error)
@@ -80,13 +85,14 @@ const loginUser = async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure:true
+            secure: true
         })
 
         res.status(200).json({
             id: user.user_id,
             email: user.email,
-            name: user.name
+            name: user.name,
+            last_name: user.last_name
         })
 
     } catch (error) {
@@ -95,5 +101,28 @@ const loginUser = async (req, res) => {
     }
 }
 
+const logoutUser = async (req, res) => {
+    res.clearCookie('token')
+    res.end()
+}
 
-export { registerUser, loginUser }
+
+
+const findUser = async (req, res) => {
+    const id = req.params.id
+
+    try {
+        const user = await db.query(`SELECT * FROM users WHERE user_id = $1`, [id])
+        if (user.rows.length === 0) {
+            return res.status(400).json({ message: 'No user found with that id' })
+        }
+
+        res.status(200).json(user.rows[0])
+    } catch (error) {
+        console.log(`error finding user`, error)
+        res.status(500).json({ message: 'something went wrong finding user' })
+    }
+}
+
+
+export { registerUser, loginUser, logoutUser, findUser }

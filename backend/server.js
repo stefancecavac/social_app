@@ -7,9 +7,12 @@ dotenv.config()
 const {Pool} = pg
 const app = express()
 
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true,
+}
 
-
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(cookieParser())
 
@@ -33,6 +36,11 @@ pool.connect((err , client , done) => {
     done()
 })
 
-app.listen(process.env.PORT , () => {
-    console.log(`server started on port ${process.env.PORT}`)
+const PORT = process.env.PORT || 4000
+
+app.listen(PORT , () => {
+    console.log(`server started on port ${PORT}`)
 })
+
+
+export default app

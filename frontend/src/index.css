@@ -4,8 +4,14 @@
 
 
 @layer components {
+    .btn-userInfo {
+        @apply text-textColor hover:bg-gray-300 rounded-lg p-2 transition-all ease-in-out;
+    }
+}
+
+@layer components {
     .btn-secundary {
-        @apply text-textColor text-xl  hover:bg-gray-200 rounded-lg p-2 transition-all ease-in-out;
+        @apply text-textColor text-xl  hover:bg-gray-300 rounded-lg p-2 transition-all ease-in-out;
     }
 }
 
