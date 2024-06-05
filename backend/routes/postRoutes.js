@@ -6,9 +6,9 @@ import authenticate from '../middleware/authentication.js'
 
 
 router.get('/' , getAllPosts)
-
 router.use(authenticate)
 router.post('/' , createPost)
+
 
 
 export default router

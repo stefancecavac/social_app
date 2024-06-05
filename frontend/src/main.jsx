@@ -7,11 +7,14 @@ import Home from './pages/Home'
 import MainLayout from './layouts/MainLayout'
 import ProfileLayout from './layouts/ProfileLayout'
 import { PostContextProvider } from './context/postContext'
-import {UserContextProvider} from './context/userContext'
+import { UserContextProvider } from './context/userContext'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import ProfilePage from './pages/ProfilePage'
-
+import { FriendsContextProvider } from './context/friendsContext'
+import AuthRedirect from './layouts/AuthRedirect'
+import FriendsPage from './pages/FriendsPage'
+ 
 const router = createBrowserRouter([
   {
     path: '/',
@@ -19,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home></Home>
+        element: <AuthRedirect><Home></Home></AuthRedirect>
       }
     ]
   },
@@ -37,7 +40,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/user/:id',
-        element: <ProfilePage></ProfilePage>
+        element: <AuthRedirect><ProfilePage></ProfilePage></AuthRedirect>
+      }
+    ]
+  },
+  {
+    path: '/friends',
+    element: <MainLayout></MainLayout>,
+    children:[
+      {
+        path: '/friends',
+        element: <AuthRedirect><FriendsPage></FriendsPage></AuthRedirect>
       }
     ]
   },
@@ -46,9 +59,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UserContextProvider>
-      <PostContextProvider>
-        <RouterProvider router={router}></RouterProvider>
-      </PostContextProvider>
+      <FriendsContextProvider>
+        <PostContextProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </PostContextProvider>
+      </FriendsContextProvider>
     </UserContextProvider>
   </React.StrictMode>,
 )

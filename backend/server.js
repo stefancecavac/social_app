@@ -19,9 +19,11 @@ app.use(cookieParser())
 
 import postRouter from './routes/postRoutes.js'
 import userRouter from './routes/userRoutes.js'
+import friendRouter from './routes/friendRoutes.js'
 
 app.use('/api/posts' , postRouter)
 app.use('/api/user' , userRouter)
+app.use('/api/friends' , friendRouter)
 
 
 

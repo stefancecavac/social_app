@@ -11,12 +11,42 @@
 
 @layer components {
     .btn-secundary {
-        @apply text-textColor text-xl  hover:bg-gray-300 rounded-lg p-2 transition-all ease-in-out;
+        @apply text-textColor text-xl  hover:bg-blue-200/50  p-2 lg:pl-5 transition-all ease-in-out hover:border-r-4 hover:border-blue-500 ;
     }
 }
 
 @layer components {
     .btn-primary {
-        @apply bg-primary text-white border-2 border-primary hover:text-primary  hover:bg-white rounded-3xl px-5 py-2 transition-all ease-in-out;
+        @apply bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-2 border-transparent hover:text-primary  hover:from-white hover:to-white hover:border-blue-500 rounded-3xl px-4 py-1 transition-all ease-in-out;
     }
 }
+
+
+@keyframes animModal {
+    0% {
+      animation-timing-function: ease-in;
+      opacity: 0;
+      transform: scale(0);
+    }
+  
+    45% {
+      animation-timing-function: ease-out;
+      opacity: 1;
+      transform: scale(1);
+    }
+  
+    70% {
+      animation-timing-function: ease-in;
+      transform: scale(0.84);
+    }
+  
+    100% {
+      animation-timing-function: ease-out;
+      transform: scale(1);
+    }
+  
+  }
+
+  .animate-modal {
+    animation: animModal 300ms ease-in-out 0s 1 normal forwards;
+  }

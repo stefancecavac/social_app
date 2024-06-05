@@ -37,7 +37,7 @@ const createPost = async (req, res) => {
     }
 
     try {
-        const post = await db.query(`INSERT INTO posts (content , user_id) VALUES ($1 , $2)`, [content, id])
+        const post = await db.query(`INSERT INTO posts (content , user_id) VALUES ($1 , $2) RETURNING *`, [content, id])
 
         res.status(201).json(post.rows[0])
 

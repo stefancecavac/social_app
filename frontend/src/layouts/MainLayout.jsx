@@ -1,16 +1,31 @@
 import { Outlet } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import UserInfo from "../components/UserInfo"
+import FriendsCard from "../components/FriendsCard"
 
 
 const MainLayout = () => {
 
 
-    return(
+    return (
         <div className="flex">
-        <Navbar></Navbar>
-        <Outlet></Outlet>
-        <UserInfo></UserInfo>
+            <Navbar></Navbar>
+
+            <div className="flex-1">
+                <UserInfo></UserInfo>
+
+
+                <div className="flex">
+                    <Outlet></Outlet>
+                    <FriendsCard></FriendsCard>
+                </div>
+
+
+
+
+            </div>
+
+
         </div>
     )
 }
